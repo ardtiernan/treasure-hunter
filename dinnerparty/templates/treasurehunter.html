@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Treasure Hunter</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel|Raleway" rel="stylesheet">
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/treasure.js' %}" type="text/javascript"></script>
+    <script type="text/javascript">
+      var ajaxUrl = "{% url 'ajax' %}";
+      var homeUrl = "{% url 'home' %}";
+      var user_id = {{user_id}};
+      var question = "{{question}}";
+    </script>
+  </head>
+  <body>
+
+    <div class="main-page">
+      <div class="text">
+        <h2>You’re a globe-trotting treasure hunter.</h2>
+        <h3>You've recently found the secret location of a great treasure.</h3>
+        <p>But before you can take it, you have to attend a dinner party of other treasure hunters.
+        Your absence would be noticed.
+        The other treasure hunters are always trying to extract information
+        and suss-out if they can steal treasure.
+        You have to walk a fine line in your conversations with them.
+        Lie more than 20% of the time, and they’ll know you have something to hide.
+        Tell the truth more than 90% of the time, and you’ll give too much away.
+        Either way, they'll lock you up, interrogate you and find your treasure.
+
+        <br><br>
+
+        You’ve already been at the party for an hour
+        and answered 40 questions already, lying 7 times.</p>
+
+
+      </div>
+      <div class="quiz" id="quiz-div">
+        <div class="question" id="question1">
+          {{question}}
+        </div>
+        <div class="checkboxes" id="checkbox1">
+          <input type="radio" name="answers" id="radio-text" checked value="text"><input id="answer-text" type="text" name="a" value=""> <br>
+          <div id="previousAnswers"></div>
+        </div>
+        <button type="button" onclick="questionAnswered()" name="button">Answer</button>
+
+      </div>
+
+
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,38 @@
+body, html {
+  background-color: #F8F7FF;
+}
+
+.main-page {
+  background-color: #FFEEDD;
+  position: relative;
+  width: 90vw;
+  left: calc(50% - 45vw);
+  height: 90vh;
+  top: 10vh;
+
+}
+
+p {
+  font-family: 'Raleway', sans-serif;
+}
+
+h2, h3 {
+  font-family: 'Cinzel', serif;
+}
+
+.quiz {
+  font-family: 'Cinzel', serif;
+}
+
+.text {
+  text-align: center;
+  width: 80vw;
+  position: relative;
+  left: calc(50% - 40vw);
+}
+
+#quiz-div {
+  position: relative;
+  width: 250px;
+  left: calc(50% - 125px);
+}
