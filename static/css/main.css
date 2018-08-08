@@ -7,8 +7,7 @@ body, html {
   position: relative;
   width: 90vw;
   left: calc(50% - 45vw);
-  height: 90vh;
-  top: 10vh;
+  height: 100%
 
 }
 
