@@ -4,16 +4,11 @@ var submittedAnswer;
 
 
 $(document).ready(function() {
-  console.log('here i am', ajaxUrl);
   setupAjax();
 
 });
 
-// function questionAnswered(){
-//   console.log(document.getElementById("textbox").checked);
-//   console.log(document.getElementById("text-answer").value)
-//
-// }
+
 
 function questionAnswered(){
   if (document.getElementById("radio-text").checked) {
@@ -29,7 +24,6 @@ function questionAnswered(){
 
 function checkAnswerList(){
   for (var i = 0; i < answersList.length; i++) {
-    console.log(i);
     if (document.getElementById("radio-" + i).checked) {
       submittedAnswer = document.getElementById("answer-" + i).innerHTML;
       return;
@@ -38,9 +32,7 @@ function checkAnswerList(){
 }
 
 function ajaxOutboundData(){
-  console.log('question: ', question);
-  console.log('answer: ', submittedAnswer);
-  console.log('user_id: ', user_id);
+
   var submitData = {
     'question': question,
     'answer': submittedAnswer,
@@ -57,9 +49,7 @@ function makeAjaxCall(){
       dataType: "json",
       data: ajaxOutboundData(),
       success: function(data) {
-          console.log(data);
           questionData = JSON.parse(data.context);
-          console.log('success');
           checkGameStatus();
         }
 
@@ -68,7 +58,6 @@ function makeAjaxCall(){
 
 function checkGameStatus(){
   if (questionData.game_over == true) {
-    console.log('game over');
     var gameOver = ""
     if (questionData.truth_percentage > 0.9) {
       gameOver += "<h2>You were too honest!</h2>"
@@ -96,10 +85,8 @@ function pushNewQuestion() {
 
 function pushAnswerList() {
   answersList = questionData.answers_list
-  console.log('answersList: ', answersList);
   var previousAnswers = ""
   for (var i = 0; i < answersList.length; i++) {
-    console.log(i);
     previousAnswers += '<input type="radio" name="answers" id="radio-' + i
     previousAnswers += '"><span id="answer-' + i
     previousAnswers += '">' + answersList[i] + '</span><br>'

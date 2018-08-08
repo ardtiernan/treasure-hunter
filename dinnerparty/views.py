@@ -61,18 +61,13 @@ class PartyTime(object):
 
     def grab_random_question(self):
         self.random_question = random.choice(self.questions_list)
-        print('random_question1: ', self.random_question)
 
     def get_previous_answers(self):
-        print('user_id: ', self.user_id)
-        print('random_question: ', self.random_question)
         with connection.cursor() as cursor:
             cursor.execute("SELECT DISTINCT(answer) FROM question_answer\
                             WHERE user_id = %s\
                             AND question = %s;", (self.user_id,self.random_question))
             listA = cursor.fetchall()
-            print('answers_list: ', listA)
-            print('ANSWERSLIST: ', self.answers_list)
             self.answers_list = []
             for answer in listA:
                 self.answers_list.append(answer[0])
@@ -81,9 +76,6 @@ class PartyTime(object):
         self.user_id = request.POST.get('user_id','unassigned')
         self.submitted_question = request.POST.get('question','unassigned')
         self.submitted_answer = request.POST.get('answer','unassigned').lower()
-        print('user_id: ', self.user_id)
-        print('submitted_question: ', self.submitted_question)
-        print('submit_answer: ', self.submitted_answer)
 
     def submit_answer(self):
         with connection.cursor() as cursor:
@@ -98,7 +90,6 @@ class PartyTime(object):
                                 GROUP BY question\
                                 HAVING COUNT(question) > 1) AAA", (self.user_id,))
             question_count = cursor.fetchone()[0]
-            print('question_count: ', question_count)
             qualified_count = self.qualifying_questions()
             question_count = question_count - qualified_count + 1
         return question_count
@@ -112,7 +103,6 @@ class PartyTime(object):
                                 HAVING COUNT(question) > 1\
                             ) AAA;", (self.user_id,))
             qualified_count = cursor.fetchone()[0]
-            print('qualified_count: ', qualified_count)
         return int(qualified_count)
 
     def calc_truth_count(self):
@@ -136,7 +126,6 @@ class PartyTime(object):
                             )\
                             SELECT SUM(max_count) FROM CCC", (self.user_id,self.user_id))
             truth_count = cursor.fetchone()[0]
-            print('truth_count: ', truth_count)
         return truth_count
 
     def calc_truth_percentage(self):
@@ -156,7 +145,6 @@ class PartyTime(object):
         return context_dict
 
     def compile_dictionary(self):
-        print('random_question2: ', self.random_question)
         context_dictA = {'question': self.random_question,
                         'answers_list': self.answers_list,
                         'game_over': self.game_over,

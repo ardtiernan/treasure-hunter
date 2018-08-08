@@ -1,0 +1,6 @@
+Django==2.0.5
+pip==18.0
+psycopg2==2.7.5
+pytz==2018.5
+setuptools==40.0.0
+wheel==0.31.1 
